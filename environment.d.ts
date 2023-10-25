@@ -10,11 +10,11 @@ declare global {
             DD_API_KEY: string = '';
 
             // POSTGRES
-            POSTGRES_USERNAME: string = ''
-            POSTGRES_PASSWORD: string = ''
-            POSTGRES_DATABASE: string = ''
-            POSTGRES_URL: string = ''
-            POSTGRES_HOST: string = ''
+            DATABASE_USERNAME: string = ''
+            DATABASE_PASSWORD: string = ''
+            DATABASE_DATABASE: string = ''
+            DATABASE_URL: string = ''
+            DATABASE_HOST: string = ''
 
             // REDIS
             REDIS_HOST: string = ''
