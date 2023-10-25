@@ -1,0 +1,99 @@
+version: "3.8"
+
+services:
+    server:
+        build: 
+            dockerfile: ./docker/node-dev.dockerfile
+            context: .
+        container_name: server_authentication
+        image: r4deu51/server_authentication
+        ports:
+            - "3000:3000"
+        volumes:
+            - ./:/app:rw
+            - /app/node_modules
+        networks:
+            - network
+        environment:
+            - NODE_ENV=development
+            - APP_ENV=development
+        env_file:
+            - ./.env
+        depends_on:
+            - redis
+            - postgres
+
+    tests-e2e:
+        command: yarn test:dev:e2e
+        container_name: tests_e2e_authentication
+        image: r4deu51/server_authentication
+        volumes:
+            - ./:/app:rw
+            - /app/node_modules
+        env_file:
+            - ./.env.test
+        depends_on:
+            - redis
+            - postgres
+
+    tests-integration:
+        command: yarn test:dev:integration
+        container_name: tests_integration_authentication
+        image: r4deu51/server_authentication
+        volumes:
+            - ./:/app:rw
+            - /app/node_modules
+        env_file:
+            - ./.env.test
+        depends_on:
+            - redis
+            - postgres
+
+    tests-unit:
+        command: yarn test:dev:unit
+        container_name: tests_unit_authentication
+        image: r4deu51/server_authentication
+        volumes:
+            - ./:/app:rw
+            - /app/node_modules
+        env_file:
+            - ./.env.test
+        depends_on:
+            - redis
+            - postgres
+
+    tests:
+        command: yarn test:dev
+        container_name: tests_authentication
+        image: r4deu51/server_authentication
+        volumes:
+            - ./:/app:rw
+            - /app/node_modules
+        env_file:
+            - ./.env.test
+        depends_on:
+            - redis
+            - postgres
+
+    redis:
+        image: redis:7.0-alpine
+        container_name: redis_authentication
+        networks:
+            - network
+        restart: always
+
+    postgres:
+        image: postgres:15.4-alpine
+        container_name: postgres_authentication
+        environment:
+            - POSTGRES_USER=$DATABASE_USERNAME
+            - POSTGRES_PASSWORD=$DATABASE_PASSWORD
+        networks:
+            - network
+        ports:
+            - "5432:5432"
+        restart: always
+
+networks:
+    network:
+        driver: bridge
