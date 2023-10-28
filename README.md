@@ -47,6 +47,8 @@ If u already understand Event Drive, just clone the repository, and enjoy with t
   - Ava
 - PostgreSQL
 - Redis
+- ElasticSearch
+- Grafana
 - Docker
 - HTTP 2.0(SPDY)
 
@@ -118,6 +120,8 @@ Se você já sabe sobre Event Drive, apenas clone o repositório, e divirta-se c
   - Ava
 - PostgreSQL
 - Redis
+- ElasticSearch
+- Grafana
 - Docker
 - HTTP 2.0(SPDY)
 
