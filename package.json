@@ -40,7 +40,6 @@
     "@types/pg": "^8.10.2",
     "@types/sequelize": "^4.28.15",
     "@types/sinon": "^10.0.15",
-    "@types/spdy": "^3.4.7",
     "@types/supertest": "^2.0.12",
     "@typescript-eslint/eslint-plugin": "^5.60.0",
     "ava": "^5.3.1",
@@ -72,7 +71,6 @@
     "pg": "^8.11.0",
     "sequelize": "^6.32.0",
     "sequelize-cli": "^6.6.1",
-    "spdy": "^4.0.2",
     "twilio": "^4.12.0",
     "winston": "^3.9.0"
   },

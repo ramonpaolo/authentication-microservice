@@ -1,8 +1,6 @@
 import express from 'express'
 import compression from 'compression'
 import cors from 'cors'
-import fs from 'fs'
-import spdy from 'spdy'
 import helmet from 'helmet'
 
 // Settings
@@ -36,12 +34,7 @@ app.get('/api/v1/healthcheck', (_, res) =>
     })
 )
 
-const server = spdy.createServer({
-    cert: fs.readFileSync('server.crt'),
-    key: fs.readFileSync('server.key'),
-}, app)
-
-server.listen(PORT)
+const server = app.listen(PORT)
 
 const signals: NodeJS.Signals[] = ['SIGTERM', 'SIGINT']
 
