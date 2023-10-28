@@ -1,7 +1,8 @@
 import winston from 'winston';
 import { hostname } from 'os';
+import TransportElastic from 'elasticsearch-transport'
 
-const { DD_API_KEY, APP_ENV } = process.env
+const { DD_API_KEY, APP_ENV, ELASTIC_PASSWORD } = process.env
 
 const serviceName = 'authentication'
 
@@ -12,15 +13,30 @@ const httpOptions: winston.transports.HttpTransportOptions = {
 }
 
 const chooseTransport = () => {
+    const transports: winston.transport[] = [
+        new TransportElastic({
+            silent: false,
+            elasticClient: {
+                node: 'http://elasticsearch:9200',
+                auth: {
+                    username: 'elastic',
+                    password: String(ELASTIC_PASSWORD),
+                },
+            }
+        }),
+    ]
+
     if (APP_ENV === 'production') {
-        return [
-            new winston.transports.Http(httpOptions),
-        ]
+        transports.push(
+            new winston.transports.Http(httpOptions)
+        )
+    } else {
+        transports.push(
+            new winston.transports.Console(),
+        )
     }
 
-    return [
-        new winston.transports.Console(),
-    ]
+    return transports;
 }
 
 const logger = winston.createLogger({

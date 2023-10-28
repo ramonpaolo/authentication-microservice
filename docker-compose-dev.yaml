@@ -94,6 +94,29 @@ services:
             - "5432:5432"
         restart: always
 
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.9.1
+        container_name: elasticsearch_authentication
+        environment:
+            - discovery.type=single-node
+            - ELASTIC_USERNAME=$ELASTIC_USERNAME
+            - ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+            - "xpack.security.enabled=false"
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        networks:
+            - network
+
+    grafana:
+        image: grafana/grafana:10.2.0
+        container_name: grafana_authentication
+        ports:
+            - "3001:3000"
+        environment:
+            - GF_SECURITY_ADMIN_USER=$GRAFANA_USERNAME
+            - GF_SECURITY_ADMIN_PASSWORD=$GRAFANA_PASSWORD
+
 networks:
     network:
         driver: bridge
