@@ -1,0 +1,337 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Logs from Authentication",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "f3c13ba0-f170-4270-863f-c21416e7a535"
+      },
+      "description": "Logs from Authentication",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timestamp"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 197
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "env"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 158
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "level"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 89
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "message"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 373
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "service"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 163
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 16,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "f3c13ba0-f170-4270-863f-c21416e7a535"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "limit": "50"
+              },
+              "type": "logs"
+            }
+          ],
+          "query": "env:$env AND service:authentication",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "title": "Logs",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_index": true,
+              "_source": true,
+              "_type": true,
+              "highlight": true,
+              "id": true,
+              "signal": true,
+              "sort": true
+            },
+            "indexByName": {
+              "_id": 7,
+              "_index": 6,
+              "_source": 5,
+              "_type": 8,
+              "env": 4,
+              "highlight": 12,
+              "id": 9,
+              "level": 2,
+              "message": 1,
+              "service": 3,
+              "signal": 10,
+              "sort": 11,
+              "timestamp": 0
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "f3c13ba0-f170-4270-863f-c21416e7a535"
+      },
+      "description": "Logs from Authentication",
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "prettifyLogMessage": true,
+        "showCommonLabels": false,
+        "showLabels": false,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "f3c13ba0-f170-4270-863f-c21416e7a535"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "limit": "50"
+              },
+              "type": "logs"
+            }
+          ],
+          "query": "env:$env AND service:authentication",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "title": "Logs",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_index": true,
+              "_source": true,
+              "_type": true,
+              "highlight": true,
+              "id": true,
+              "signal": true,
+              "sort": true
+            },
+            "indexByName": {
+              "_id": 7,
+              "_index": 6,
+              "_source": 5,
+              "_type": 8,
+              "env": 4,
+              "highlight": 12,
+              "id": 9,
+              "level": 2,
+              "message": 1,
+              "service": 3,
+              "signal": 10,
+              "sort": 11,
+              "timestamp": 0
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "logs"
+    }
+  ],
+  "refresh": "5s",
+  "schemaVersion": 38,
+  "tags": [
+    "authentication"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "development",
+          "value": "development"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "env",
+        "options": [
+          {
+            "selected": false,
+            "text": "production",
+            "value": "production"
+          },
+          {
+            "selected": false,
+            "text": "sandbox",
+            "value": "sandbox"
+          },
+          {
+            "selected": true,
+            "text": "development",
+            "value": "development"
+          }
+        ],
+        "query": "production, sandbox, development",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Logs Authentication",
+  "uid": "f92cdb32-45eb-4335-970d-9356dc7c5aab",
+  "version": 10,
+  "weekStart": ""
+}
