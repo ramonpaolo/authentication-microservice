@@ -31,10 +31,15 @@ services:
             - ./:/app:rw
             - /app/node_modules
         env_file:
-            - ./.env.test
+            - ./.env
+        environment:
+            - NODE_ENV=test
+            - APP_ENV=test
         depends_on:
             - redis
             - postgres
+        networks:
+            - network
 
     tests-integration:
         command: yarn test:dev:integration
@@ -44,10 +49,15 @@ services:
             - ./:/app:rw
             - /app/node_modules
         env_file:
-            - ./.env.test
+            - ./.env
+        environment:
+            - NODE_ENV=test
+            - APP_ENV=test
         depends_on:
             - redis
             - postgres
+        networks:
+            - network
 
     tests-unit:
         command: yarn test:dev:unit
@@ -57,10 +67,15 @@ services:
             - ./:/app:rw
             - /app/node_modules
         env_file:
-            - ./.env.test
+            - ./.env
+        environment:
+            - NODE_ENV=test
+            - APP_ENV=test
         depends_on:
             - redis
             - postgres
+        networks:
+            - network
 
     tests:
         command: yarn test:dev
@@ -70,10 +85,15 @@ services:
             - ./:/app:rw
             - /app/node_modules
         env_file:
-            - ./.env.test
+            - ./.env
+        environment:
+            - NODE_ENV=test
+            - APP_ENV=test
         depends_on:
             - redis
             - postgres
+        networks:
+            - network
 
     redis:
         image: redis:7.0-alpine
