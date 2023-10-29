@@ -4,8 +4,19 @@ import crypto from 'crypto'
 // Utils
 import { loggerInfo } from '../utils/logger.utils'
 
+// Settings
+import { counterRequestsHTTP, delayPerformanceHTTP } from '../settings/metrics.settings'
+
 const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const timeStart = process.uptime()
+
+    counterRequestsHTTP.inc({
+        method: req.method,
+        route: req.path,
+        status_code: res.statusCode,
+        env: process.env.APP_ENV,
+    })
+    const end = delayPerformanceHTTP.startTimer()
 
     const requestId = crypto.randomUUID()
 
@@ -26,6 +37,13 @@ const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
     res.on('finish', () => {
         const timeEnd = process.uptime()
+
+        end({
+            method: req.method,
+            route: req.path,
+            status_code: res.statusCode,
+            env: process.env.APP_ENV,
+        })
 
         loggerInfo('finishing request', {
             delay_performance: timeEnd - timeStart,

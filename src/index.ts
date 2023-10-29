@@ -7,6 +7,7 @@ import helmet from 'helmet'
 import logger from './settings/logger.settings'
 import { redis } from './settings/redis.settings'
 import prisma from './settings/prisma.settings'
+import { prometheus } from './settings/metrics.settings'
 
 // Middlewares
 import loggerMiddleware from './middlewares/global.middleware'
@@ -26,7 +27,12 @@ app.use(helmet())
 app.use(cors())
 app.use(compression())
 
-app.get('/api/v1/healthcheck', (_, res) => 
+app.get('/metrics', async (_, res) => {
+    res.set('Content-Type', prometheus.register.contentType);
+    res.send(await prometheus.register.metrics());
+});
+
+app.get('/api/v1/healthcheck', (_, res) =>
     res.status(200).json({
         status: 'success',
         message: 'project is working',

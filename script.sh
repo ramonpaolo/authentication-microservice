@@ -3,5 +3,5 @@ if [ "$1" = "down" ]; then
 else
     docker-compose -f docker-compose-dev.yaml down &&
     docker-compose -f docker-compose-dev.yaml build $1 &&
-    docker-compose -f docker-compose-dev.yaml up -d $1 redis postgres elasticsearch grafana
+    docker-compose -f docker-compose-dev.yaml up -d $1 redis postgres elasticsearch grafana prometheus
 fi

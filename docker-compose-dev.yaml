@@ -136,6 +136,19 @@ services:
         environment:
             - GF_SECURITY_ADMIN_USER=$GRAFANA_USERNAME
             - GF_SECURITY_ADMIN_PASSWORD=$GRAFANA_PASSWORD
+        networks:
+            - network
+
+    prometheus:
+        image: prom/prometheus:v2.47.2
+        container_name: prometheus_authentication
+        ports:
+            - "9090:9090"
+        volumes:
+            - ./prometheus.yml:/etc/prometheus/prometheus.yml
+        networks:
+            - network
+
 
 networks:
     network:
