@@ -6,9 +6,6 @@ declare global {
             NODE_ENV: 'test' | 'development' | 'production';
             APP_ENV: 'test' | 'development' | 'staging' | 'production';
 
-            // DATADOG
-            DD_API_KEY: string = '';
-
             // POSTGRES
             DATABASE_USERNAME: string = ''
             DATABASE_PASSWORD: string = ''
